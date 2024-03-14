@@ -31,14 +31,12 @@ public partial class MainWindow : Window
     {
         string officeML = string.Empty;
 
-        string testMathXml = @"<m:oMathPara xmlns:m=""http://schemas.openxmlformats.org/officeDocument/2006/math"">
-</m:oMathPara>";
         Console.WriteLine(mathParagraphXml);
         XslCompiledTransform xslTransform = new XslCompiledTransform();
 
         // The OMML2MML.xsl file is located under 
         // %ProgramFiles%\Microsoft Office\Office15\
-        xslTransform.Load(@"c:\Program Files\Microsoft Office\root\Office16" + @"\OMML2MML.XSL");
+        xslTransform.Load(@"./assets/OMML2MML.XSL");
 
         using (TextReader tr = new StringReader(mathParagraphXml))
         {
