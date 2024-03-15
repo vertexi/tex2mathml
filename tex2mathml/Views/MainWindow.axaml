@@ -1,37 +1,14 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:math="clr-namespace:AvaloniaMath.Controls;assembly=AvaloniaMath"
         xmlns:vm="using:tex2mathml.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:tex2mathml.Views"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="230"
-		Width="500"
-		Height="230"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="800"
+		Width="700"
+		Height="280"
         x:Class="tex2mathml.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="tex2mathml">
-	<Grid RowDefinitions="auto,auto,auto,auto,auto">
-
-		<TextBox Name="formula" Text="L = \int_a^b \sqrt[4]{ \left| \sum_{i,j=1}^ng_{ij}\left(\gamma(t)\right) \left[\frac{d}{dt}x^i\circ\gamma(t) \right] \left\{ \frac{d}{dt}x^j\circ\gamma(t) \right\} \right|}dt"/>
-		<Slider Grid.Row="1" Minimum="1" Maximum="100" Value="20" Name="zoom"/>
-
-		<ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto">
-			<math:FormulaBlock Scale="{Binding #zoom.Value}" Formula="{Binding #formula.Text}" />
-		</ScrollViewer>
-
-		<Button x:Name="ConvertButton"
-				Content="Convert"
-				Padding="10,5"
-				Grid.Row="3"/>
-
-				<Grid ColumnDefinitions="*,auto" Grid.Row="6">
-			<TextBox Name="mathml" Text="hello!"/>
-			<Button x:Name="copyButton"
-				Content="copy"
-				Padding="10,5"
-				Grid.Row="0"
-				Grid.Column="1"/>
-		</Grid>
-	</Grid>
+	<views:MainView />
 </Window>

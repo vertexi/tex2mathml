@@ -5,6 +5,8 @@ using Avalonia.Markup.Xaml;
 using tex2mathml.ViewModels;
 using tex2mathml.Views;
 
+using AvaloniaWebView;
+
 namespace tex2mathml;
 
 public partial class App : Application
@@ -12,6 +14,12 @@ public partial class App : Application
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+    }
+
+    public override void RegisterServices()
+    {
+        base.RegisterServices();
+        AvaloniaWebViewBuilder.Initialize(default);
     }
 
     public override void OnFrameworkInitializationCompleted()

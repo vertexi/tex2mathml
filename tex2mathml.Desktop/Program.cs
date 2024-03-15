@@ -2,6 +2,7 @@
 
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Avalonia.WebView.Desktop;
 
 namespace tex2mathml.Desktop;
 
@@ -20,5 +21,6 @@ class Program
             .UsePlatformDetect()
             .WithInterFont()
             .LogToTrace()
-            .UseReactiveUI();
+            .UseReactiveUI()
+            .UseDesktopWebView();
 }

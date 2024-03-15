@@ -3,7 +3,7 @@
     <OutputType>WinExe</OutputType>
     <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
     One for Windows with net7.0-windows TFM, one for MacOS with net7.0-macos and one with net7.0 TFM for Linux.-->
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -11,6 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageReference Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,11 +21,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="assets\MML2OMML.XSL">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\OMML2MML.XSL">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="assets\texmath.exe">
+    <None Update="assets\pandoc.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\temml.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\texmath.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>
