@@ -37,16 +37,25 @@ public partial class MainView : UserControl
 
         string jstr = System.IO.File.ReadAllText("./assets/temml.min.js");
         engine.Execute(jstr);
-        var mathML = engine.Evaluate(@"temml.renderToString(inputtext)").ToObject();
-        if (mathML.ToString().IndexOf("error") == 0)
+        var mathML = new object();
+        try
         {
-            mathML = ReplaceFirstOccurrence(mathML.ToString(), @"<math>", @"<math xmlns=""http://www.w3.org/1998/Math/MathML"">");
+            mathML = engine.Evaluate(@"temml.renderToString(inputtext, { displayMode: true })").ToObject();
+            if (mathML.ToString().IndexOf("error") == 0)
+            {
+                mathML = ReplaceFirstOccurrence(mathML.ToString(), @"<math>", @"<math xmlns=""http://www.w3.org/1998/Math/MathML"">");
+            }
+            else {
+                mathML = @"<p>" + mathML + "</p>";
+            }
         }
-        else {
-            mathML = @"<p>" + mathML + "</p>";
+        catch (Exception jsEngineErr)
+        {
+            mathML = @"<p>" + jsEngineErr.Message + "</p>";
         }
-
-        var mathMlHtml = @"<!DOCTYPE html>
+        finally
+        {
+            var mathMlHtml = @"<!DOCTYPE html>
 
     <html>
       <head>
@@ -83,8 +92,8 @@ public partial class MainView : UserControl
       </body>
     </html>
     ";
-        PART_WebView.HtmlContent = mathMlHtml;
-
+            PART_WebView.HtmlContent = mathMlHtml;
+        }
     }
 
     private void PART_WebView_WebViewNewWindowRequested(object? sender, WebViewCore.Events.WebViewNewWindowEventArgs e)
