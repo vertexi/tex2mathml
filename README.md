@@ -11,9 +11,12 @@
 
 ![image-20240314161917592](media/image-20240314161917592.png)
 
-$$
-{a}_{n}\enspace\underrightarrow{n\rightarrow\infty} \enspace0 \enspace u. \enspace{b}_{n}\enspace\underrightarrow{n\rightarrow\infty}\enspace \infty
-$$
+![image-20240315134017207](media/image-20240315134017207.png)
+
+
+
+![image-20240315134111418](media/image-20240315134111418.png)
+
 
 
 **Pull request welcome.**
