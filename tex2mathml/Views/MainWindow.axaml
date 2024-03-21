@@ -9,6 +9,7 @@
 		Height="280"
         x:Class="tex2mathml.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="tex2mathml">
+        Title="tex2mathml"
+		Topmost="True">
 	<views:MainView />
 </Window>

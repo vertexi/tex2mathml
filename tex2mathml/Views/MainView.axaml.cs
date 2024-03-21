@@ -11,20 +11,23 @@ using System.Xml;
 using System;
 using TextCopy;
 using AvaloniaWebView;
+using System.Reflection;
+using Avalonia.Notification;
 
 namespace tex2mathml.Views;
 
 public partial class MainView : UserControl
 {
+    Engine engine;
     public MainView()
     {
         InitializeComponent();
 
-        var ConvertButton = this.FindControl<Button>("ConvertButton");
-        ConvertButton.Click += ConvertButton_Click;
+        engine = new Engine().SetValue("log", new Action<object>(logout));
+        string temml = System.IO.File.ReadAllText(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\assets\temml.min.js");
+        engine.Execute(temml);
 
-        var copyButton = this.FindControl<Button>("copyButton");
-        copyButton.Click += CopyButton_Click;
+        ConvertAndCopyButton.Click += ConvertAndCopyButton_Click;
 
         PART_WebView.WebViewNewWindowRequested += PART_WebView_WebViewNewWindowRequested;
 
@@ -33,11 +36,8 @@ public partial class MainView : UserControl
 
     private void Formula_TextChanged(object? sender, TextChangedEventArgs e)
     {
-        var engine = new Engine().SetValue("log", new Action<object>(logout)).SetValue("inputtext", formula.Text.ToString());
-
-        string jstr = System.IO.File.ReadAllText("./assets/temml.min.js");
-        engine.Execute(jstr);
         var mathML = new object();
+        engine.SetValue("inputtext", formula.Text.ToString());
         try
         {
             mathML = engine.Evaluate(@"temml.renderToString(inputtext, { displayMode: true })").ToObject();
@@ -99,11 +99,6 @@ public partial class MainView : UserControl
     private void PART_WebView_WebViewNewWindowRequested(object? sender, WebViewCore.Events.WebViewNewWindowEventArgs e)
     {
         e.UrlLoadingStrategy = WebViewCore.Enums.UrlRequestStrategy.OpenInNewWindow;
-    }
-
-    private void CopyButton_Click(object? sender, RoutedEventArgs e)
-    {
-        ClipboardService.SetText(mathml.Text);
     }
 
     public string mml2omml(string mml)
@@ -244,7 +239,7 @@ public partial class MainView : UserControl
         Debug.WriteLine(value);
     }
 
-    private void ConvertButton_Click(object? sender, RoutedEventArgs e)
+    private void ConvertAndCopyButton_Click(object? sender, RoutedEventArgs e)
     {
         Process p = new Process();
         p.StartInfo.FileName = "./assets/pandoc.exe";
@@ -288,5 +283,7 @@ public partial class MainView : UserControl
         //string final_result = omml2mml(mml2omml(mathML.ToString()));
 
         mathml.Text = final_result;
+
+        ClipboardService.SetText(final_result);
     }
 }
