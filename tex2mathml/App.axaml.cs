@@ -6,6 +6,11 @@ using tex2mathml.ViewModels;
 using tex2mathml.Views;
 
 using AvaloniaWebView;
+using Avalonia.Controls;
+using ReactiveUI;
+using System.Reactive;
+using System.Diagnostics;
+using Avalonia.Interactivity;
 
 namespace tex2mathml;
 

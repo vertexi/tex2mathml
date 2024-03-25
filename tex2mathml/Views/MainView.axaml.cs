@@ -13,6 +13,7 @@ using TextCopy;
 using AvaloniaWebView;
 using System.Reflection;
 using Avalonia.Notification;
+using Avalonia.Controls.ApplicationLifetimes;
 
 namespace tex2mathml.Views;
 
