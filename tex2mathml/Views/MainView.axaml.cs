@@ -250,7 +250,8 @@ public partial class MainView : UserControl
         p.StartInfo.RedirectStandardError = true;
         p.StartInfo.CreateNoWindow = true;
         p.Start();
-        p.StandardInput.WriteLine("$$\n" + formula.Text.ToString() + "\n$$");
+        string formula_str = formula.Text.ToString().Replace(@"\cfrac", @"\dfrac");
+        p.StandardInput.WriteLine("$$\n" + formula_str + "\n$$");
         p.StandardInput.Flush();
         p.StandardInput.Close();
         string output = p.StandardOutput.ReadToEnd();
