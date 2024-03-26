@@ -8,7 +8,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="tex2mathml.Views.MainView"
              x:DataType="vm:MainViewModel">
-	<Grid RowDefinitions="30,auto,4*,auto" ColumnDefinitions="*" Margin="4">
+	<Grid RowDefinitions="30,*,4*,auto" ColumnDefinitions="*" Margin="4">
 		<Border Grid.Row="0">
 			<controls:NotificationMessageContainer Manager="{Binding Manager}" />
 		</Border>
